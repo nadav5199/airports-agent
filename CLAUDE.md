@@ -7,8 +7,9 @@ The agent helps analysts identify airports where renovations/expansions will be 
 based on increased flight and passenger capacity — i.e., which airports are strong investment
 candidates for terminal expansion or other modernization.
 
-**Status:** Not yet started — no source code exists in this directory yet. This file is the
-requirements reference for building the project.
+**Status:** Core implementation complete and merged to `main` (ingestion, scoring, backend,
+frontend) — verified end-to-end against all four example questions from the exam brief. Remaining:
+the short design/architecture document deliverable (`docs/design.md`, not yet written).
 
 ## Example Queries the Agent Must Support
 - "Which airports in New England are strong candidates for terminal expansion?"
