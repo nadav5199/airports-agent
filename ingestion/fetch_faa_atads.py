@@ -38,8 +38,11 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from synthetic_common import SEASONAL_INDEX, month_range, rng_for, size_tier
 
-START_YEAR, START_MONTH = 2023, 1
-N_MONTHS = 24  # 2 full years -> enough for a multi-year CAGR (traffic growth KPI)
+START_YEAR, START_MONTH = 2024, 6
+N_MONTHS = 24  # 2 full years -> enough for a multi-year CAGR (traffic growth KPI);
+# ends 2026-05, aligned with the real BTS On-Time data vintage pulled in
+# fetch_bts_ontime.py so the demo dataset reads as one coherent (if partly
+# synthetic) time window rather than sources from visibly different eras.
 
 BASE_OPS_BY_TIER = {
     "large": (24000, 34000),

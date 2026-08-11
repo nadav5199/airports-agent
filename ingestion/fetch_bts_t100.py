@@ -39,8 +39,9 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from synthetic_common import month_range, rng_for, size_tier
 
-START_YEAR, START_MONTH = 2023, 1
-N_MONTHS = 24
+START_YEAR, START_MONTH = 2024, 6
+N_MONTHS = 24  # ends 2026-05, aligned with the real BTS On-Time data vintage
+# pulled in fetch_bts_ontime.py (see that script's docstring).
 
 MAJOR_HUBS = ["ATL", "ORD", "DFW", "DEN", "LAX", "JFK", "SFO", "MIA", "SEA", "CLT"]
 CARRIERS = ["AA", "DL", "UA", "WN", "B6", "AS", "NK"]
