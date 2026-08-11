@@ -48,10 +48,18 @@ BASE_URL = (
     "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_{year}_{month}.zip"
 )
 
-# Recent months to pull (real, bounded pull -- keeps runtime/bandwidth reasonable
-# while still giving enough history for month-over-month signal). Adjust as needed.
+# Recent months to pull (real, bounded pull). Each monthly file is BTS's FULL
+# national on-time-performance extract (~500-600k flight rows, ~25-30MB zipped)
+# that we download in full and filter client-side -- BTS does not expose this
+# table through a filterable query API (checked: their Socrata/data.transportation.gov
+# catalog only lists 3 unrelated datasets), so there's no way to request just the
+# in-scope-airport rows server-side. Kept to 2 months (not more) as a deliberate
+# time-budget tradeoff for this exercise -- this runs once as an offline ingestion
+# step (see run_all.py), never at chat/query time, so its runtime doesn't affect
+# the live app; it's just slow to iterate on during ingestion. Increase this list
+# to pull more history if a full re-run's runtime is acceptable.
 MONTHS_TO_FETCH = [
-    (2026, 2), (2026, 3), (2026, 4), (2026, 5),
+    (2026, 4), (2026, 5),
 ]
 
 # Columns we actually need from the (large, ~110-column) monthly extract.
