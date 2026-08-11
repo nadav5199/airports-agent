@@ -1,0 +1,63 @@
+airport_code,name,city,state,region,lat,lon,runway_count,longest_runway_ft
+ACK,Nantucket Memorial Airport,Nantucket,MA,New England,41.25310135,-70.06020355,2,6303.0
+ANC,Ted Stevens Anchorage International Airport,Anchorage,AK,Alaska,61.179004,-149.992561,3,12400.0
+ATL,Hartsfield Jackson Atlanta International Airport,Atlanta,GA,Southeast,33.6367,-84.428101,5,12390.0
+AUG,Augusta State Airport,Augusta,ME,New England,44.3205986023,-69.7973022461,2,5002.0
+AUS,Austin Bergstrom International Airport,Austin,TX,South Central,30.197535,-97.662015,2,12250.0
+BDL,Bradley International Airport,Hartford,CT,New England,41.938555,-72.688016,2,9510.0
+BED,Laurence G Hanscom Field,Bedford,MA,New England,42.470001,-71.289001,2,7011.0
+BGR,Bangor International Airport,Bangor,ME,New England,44.806364,-68.826668,1,11440.0
+BHB,Hancock County-Bar Harbor Airport,Bar Harbor,ME,New England,44.45000076,-68.3615036,2,5200.0
+BID,Block Island State Airport,Block Island,RI,New England,41.168446,-71.578631,1,2502.0
+BNA,Nashville International Airport,Nashville,TN,Southeast,36.1245,-86.6782,4,11030.0
+BOS,Boston Logan International Airport,Boston,MA,New England,42.36197,-71.0079,6,10083.0
+BTV,Patrick Leahy Burlington International Airport,Burlington,VT,New England,44.471901,-73.153297,2,8319.0
+BWI,Baltimore/Washington International Thurgood Marshall Airport,Baltimore,MD,Mid-Atlantic,39.1754,-76.668297,3,10503.0
+CLT,Charlotte Douglas International Airport,Charlotte,NC,Southeast,35.2140007019043,-80.94309997558594,3,10000.0
+DCA,Ronald Reagan Washington National Airport,Washington,DC,Mid-Atlantic,38.8521,-77.037697,3,7169.0
+DEN,Denver International Airport,Denver,CO,Mountain,39.860027,-104.673792,6,16000.0
+DFW,Dallas Fort Worth International Airport,Dallas-Fort Worth,TX,South Central,32.896801,-97.038002,7,13401.0
+DTW,Detroit Metropolitan Wayne County Airport,Detroit,MI,Midwest,42.21377,-83.353786,6,12003.0
+EWB,New Bedford Regional Airport,New Bedford,MA,New England,41.67610168457031,-70.95690155029297,2,5400.0
+EWR,Newark Liberty International Airport,Newark,NJ,Mid-Atlantic,40.6894,-74.170545,3,11000.0
+FLL,Fort Lauderdale Hollywood International Airport,Fort Lauderdale,FL,Southeast,26.072599,-80.152702,2,9000.0
+HNL,Daniel K. Inouye International Airport,"Honolulu, Oahu",HI,Hawaii,21.318387,-157.92567,6,12360.0
+HVN,Tweed New Haven Airport,New Haven,CT,New England,41.262869,-72.887694,1,5600.0
+HYA,Cape Cod Gateway Airport,Hyannis,MA,New England,41.6693,-70.280403,2,5425.0
+IAD,Washington Dulles International Airport,Dulles,VA,Southeast,38.9445,-77.455803,4,11500.0
+IAH,George Bush Intercontinental Airport,Houston,TX,South Central,29.9844,-95.3414,5,12001.0
+JFK,John F. Kennedy International Airport,New York,NY,Mid-Atlantic,40.639447,-73.779317,4,14511.0
+LAS,Harry Reid International Airport,Las Vegas,NV,Mountain,36.083361,-115.151817,4,14835.0
+LAX,Los Angeles International Airport,Los Angeles,CA,West Coast,33.942501,-118.407997,4,12894.0
+LEB,Lebanon Municipal Airport,Lebanon,NH,New England,43.6260986328,-72.30419921880001,2,5496.0
+LGA,LaGuardia Airport,New York,NY,Mid-Atlantic,40.777199,-73.872597,2,7002.0
+MCO,Orlando International Airport,Orlando,FL,Southeast,28.429399490356445,-81.30899810791016,4,12005.0
+MDW,Chicago Midway International Airport,Chicago,IL,Midwest,41.785999,-87.752403,4,6522.0
+MHT,Manchester-Boston Regional Airport,Manchester,NH,New England,42.932598,-71.435699,2,9250.0
+MIA,Miami International Airport,Miami,FL,Southeast,25.796011,-80.289751,4,13016.0
+MSP,Minneapolis–Saint Paul International Airport / Wold–Chamberlain Field,Minneapolis,MN,Midwest,44.880081,-93.221741,4,11006.0
+MSY,Louis Armstrong New Orleans International Airport,New Orleans,LA,South Central,29.993401,-90.264673,2,10104.0
+MVY,Martha's Vineyard Airport,Martha's Vineyard,MA,New England,41.3931007385,-70.6143035889,2,5504.0
+NPT,Newport State Airport,Newport,RI,New England,41.532207,-71.281039,2,2999.0
+OAK,Oakland San Francisco Bay Airport,Oakland,CA,West Coast,37.720085,-122.221184,4,10520.0
+ORD,Chicago O'Hare International Airport,Chicago,IL,Midwest,41.9786,-87.9048,8,13000.0
+ORH,Worcester Regional Airport,Worcester,MA,New England,42.2673,-71.875702,2,7001.0
+PDX,Portland International Airport,Portland,OR,West Coast,45.588699,-122.598,3,11000.0
+PHL,Philadelphia International Airport,Philadelphia,PA,Mid-Atlantic,39.871899,-75.241096,4,12000.0
+PHX,Phoenix Sky Harbor International Airport,Phoenix,AZ,Mountain,33.435302,-112.005905,3,11489.0
+PQI,Presque Isle International Airport,Presque Isle,ME,New England,46.688999,-68.0448,2,7441.0
+PSM,Portsmouth International Airport at Pease,Portsmouth,NH,New England,43.0779,-70.823303,1,11321.0
+PVD,Rhode Island T. F. Green International Airport,Providence/Warwick,RI,New England,41.725038,-71.425668,2,8700.0
+PWM,Portland International Jetport,Portland,ME,New England,43.646198,-70.309303,2,7200.0
+RDU,Raleigh-Durham International Airport,Raleigh/Durham,NC,Southeast,35.878659,-78.7873,3,10000.0
+RKD,Knox County Regional Airport,Rockland,ME,New England,44.060101,-69.099197,2,5412.0
+RUT,Rutland - Southern Vermont Regional Airport,Rutland,VT,New England,43.5294,-72.9496,2,5304.0
+SAN,San Diego International Airport,San Diego,CA,West Coast,32.733601,-117.190002,1,9401.0
+SEA,Seattle–Tacoma International Airport,Seattle,WA,West Coast,47.447943,-122.310276,3,11901.0
+SFO,San Francisco International Airport,San Francisco,CA,West Coast,37.619806,-122.374821,4,11870.0
+SLC,Salt Lake City International Airport,Salt Lake City,UT,Mountain,40.78886,-111.979866,4,12002.0
+SMF,Sacramento International Airport,Sacramento,CA,West Coast,38.6954,-121.591003,2,8605.0
+SNA,John Wayne Orange County International Airport,Santa Ana,CA,West Coast,33.675063,-117.869281,2,5700.0
+STL,St. Louis Lambert International Airport,St Louis,MO,Midwest,38.748697,-90.370003,4,11020.0
+TPA,Tampa International Airport,Tampa,FL,Southeast,27.9755,-82.533203,3,11002.0
+WST,Westerly State Airport,Westerly,RI,New England,41.349602,-71.803398,2,4010.0

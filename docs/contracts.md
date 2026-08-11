@@ -81,7 +81,7 @@ it out in the design doc.
 | airport_code | str | FK → airports.csv |
 | vmc_hourly_capacity | int | operations/hour under visual conditions |
 | imc_hourly_capacity | int | operations/hour under instrument conditions |
-| source | str | `"faa_profile"` (real, hand-transcribed) or `"estimated"` (not present in this file — airports missing here get the runway-count proxy at scoring time, see below) |
+| source | str | `"faa_profile_approx"` (representative/approximate figures, hand-transcribed from public knowledge rather than verified line-by-line against each airport's current official PDF — see `data/processed/README.md`). Airports missing from this file entirely get the runway-count proxy at scoring time (see below); that proxy's confidence label is `"estimated"`, set by the scoring engine, not this file. |
 
 ## 2. Scoring engine (`scoring/`)
 
