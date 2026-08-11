@@ -1,0 +1,43 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --panel-bg: #ffffff;
+  --border: #d9dde3;
+  --text: #1c2230;
+  --text-muted: #5a6472;
+  --accent: #2f5fd9;
+  --accent-contrast: #ffffff;
+  --user-bubble: #2f5fd9;
+  --user-bubble-text: #ffffff;
+  --assistant-bubble: #eef1f6;
+  --assistant-bubble-text: #1c2230;
+  --badge-actual-bg: #dcf5e2;
+  --badge-actual-text: #146c2e;
+  --badge-estimated-bg: #fff2cc;
+  --badge-estimated-text: #8a6400;
+  --badge-unavailable-bg: #f6d6d6;
+  --badge-unavailable-text: #9c1c1c;
+  --error-bg: #fbe4e4;
+  --error-text: #8a1c1c;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+}
