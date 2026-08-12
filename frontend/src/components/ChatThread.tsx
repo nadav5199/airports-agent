@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ChatMessage } from "../types";
 import BreakdownPanel from "./BreakdownPanel";
 import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
+import { renderMarkdown } from "../lib/renderMarkdown";
 
 export default function ChatThread({
   messages,
@@ -52,7 +53,9 @@ export default function ChatThread({
           <div key={m.id} className={`chat-message chat-message-${m.role}`}>
             <div className={`chat-bubble ${m.error ? "chat-bubble-error" : ""}`}>
               <div className="chat-role">{m.role === "user" ? "You" : "Agent"}</div>
-              <div className="chat-text">{m.text}</div>
+              <div className="chat-text">
+                {m.role === "assistant" ? renderMarkdown(m.text) : m.text}
+              </div>
             </div>
             {m.role === "assistant" && m.breakdown && m.breakdown.length > 0 && (
               <BreakdownPanel items={m.breakdown} />
