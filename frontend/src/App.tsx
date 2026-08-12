@@ -98,33 +98,37 @@ export default function App() {
   }
 
   return (
-    <div className="app-shell">
-      <header className="app-header">
-        <h1>Airport Investment Intelligence Agent</h1>
-        <p>
-          Chat with a deterministic-scoring-backed agent about US airport terminal/capacity
-          expansion candidates. Scores come from real computed KPIs, not LLM guesses -- expand
-          "Show the math" under any answer to audit the numbers.
-        </p>
-        {speechSupported && (
-          <label className="voice-output-toggle">
-            <input
-              type="checkbox"
-              checked={voiceOutput}
-              onChange={(e) => {
-                setVoiceOutput(e.target.checked);
-                if (!e.target.checked) window.speechSynthesis.cancel();
-              }}
-            />
-            Read replies aloud
-          </label>
-        )}
-        {voiceError && <p className="voice-error">{voiceError}</p>}
-      </header>
-      <div className="app-body">
-        <AirportSidebar airports={airports} loading={airportsLoading} error={airportsError} />
-        <ChatThread messages={messages} onSend={handleSend} sending={sending} />
+    <>
+      <div className="app-header-band">
+        <header className="app-header">
+          <h1>Airport Investment Intelligence Agent</h1>
+          <p>
+            Chat with a deterministic-scoring-backed agent about US airport terminal/capacity
+            expansion candidates. Scores come from real computed KPIs, not LLM guesses -- expand
+            "Show the math" under any answer to audit the numbers.
+          </p>
+          {speechSupported && (
+            <label className="voice-output-toggle">
+              <input
+                type="checkbox"
+                checked={voiceOutput}
+                onChange={(e) => {
+                  setVoiceOutput(e.target.checked);
+                  if (!e.target.checked) window.speechSynthesis.cancel();
+                }}
+              />
+              Read replies aloud
+            </label>
+          )}
+          {voiceError && <p className="voice-error">{voiceError}</p>}
+        </header>
       </div>
-    </div>
+      <div className="app-shell">
+        <div className="app-body">
+          <AirportSidebar airports={airports} loading={airportsLoading} error={airportsError} />
+          <ChatThread messages={messages} onSend={handleSend} sending={sending} />
+        </div>
+      </div>
+    </>
   );
 }

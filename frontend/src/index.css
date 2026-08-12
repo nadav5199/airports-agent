@@ -1,15 +1,17 @@
 :root {
   color-scheme: light;
-  --bg: #f5f6f8;
+  --bg: #e9ebf3;
   --panel-bg: #ffffff;
-  --border: #d9dde3;
+  --border: #c3c9d3;
   --text: #1c2230;
-  --text-muted: #5a6472;
-  --accent: #2f5fd9;
+  --text-muted: #4b5563;
+  --accent: #4f46e5;
+  --accent-dark: #312e81;
+  --accent-tint: #eef0fd;
   --accent-contrast: #ffffff;
-  --user-bubble: #2f5fd9;
+  --user-bubble: #4f46e5;
   --user-bubble-text: #ffffff;
-  --assistant-bubble: #eef1f6;
+  --assistant-bubble: #e2e7f0;
   --assistant-bubble-text: #1c2230;
   --badge-actual-bg: #dcf5e2;
   --badge-actual-text: #146c2e;

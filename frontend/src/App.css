@@ -1,15 +1,19 @@
-.app-shell {
+#root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
+}
+
+.app-header-band {
+  flex-shrink: 0;
+  width: 100%;
+  background: var(--accent-dark);
 }
 
 .app-header {
-  padding: 1rem 0 0.5rem;
-  flex-shrink: 0;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem 1rem 0.75rem;
 }
 
 .app-header h1 {
@@ -17,11 +21,12 @@
   font-size: 1.55rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  color: var(--accent-contrast);
 }
 
 .app-header p {
   margin: 0;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.85rem;
   max-width: 70ch;
 }
@@ -32,14 +37,25 @@
   gap: 0.4rem;
   margin-top: 0.5rem;
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
 }
 
 .voice-error {
   margin: 0.35rem 0 0;
   font-size: 0.78rem;
-  color: var(--error-text);
+  color: #fecaca;
+}
+
+.app-shell {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-body {
@@ -47,14 +63,13 @@
   display: flex;
   gap: 1rem;
   min-height: 0;
-  padding-bottom: 1rem;
 }
 
 /* Sidebar */
 .sidebar {
-  width: 280px;
+  width: 240px;
   flex-shrink: 0;
-  background: var(--panel-bg);
+  background: var(--accent-tint);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.75rem;
@@ -151,6 +166,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  background: linear-gradient(to bottom, var(--accent-tint), var(--panel-bg) 240px);
 }
 
 .chat-empty {
@@ -191,6 +207,7 @@
 .chat-message-assistant .chat-bubble {
   background: var(--assistant-bubble);
   color: var(--assistant-bubble-text);
+  border: 1px solid var(--border);
 }
 
 .chat-bubble-error {
