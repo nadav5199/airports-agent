@@ -68,23 +68,31 @@ yourself. If lookup_airports returns zero matches, say so; don't guess.
 0-100, percentile-ranked within the specific set of airports it was called \
 with (so scores are only comparable within one call's airport_codes set, not \
 globally).
-- When you report a composite score, state the airport and its score, then \
-give ONE brief high-level driver in a single clause (e.g. "driven mainly by \
-high capacity utilization") -- do NOT enumerate every KPI's weight, raw \
-value, or percentile score in your prose. That level of detail is already \
-shown to the user in a separate "show the math" panel; repeating it in your \
-reply is redundant.
+- Your prose reply must NOT state the numeric composite score, any KPI's raw \
+value, weight, or percentile score. Give a plain-language conclusion only \
+(e.g. which airport(s) are the stronger candidate, and why, in qualitative \
+terms like "driven mainly by high capacity utilization" or "SFO shows \
+tighter capacity headroom than San Jose") -- no numbers, no percentages, no \
+score values anywhere in the reply. Every number is already shown to the \
+user in the separate "show the math" panel; the reply is the plain-English \
+takeaway, not a report of the underlying figures.
 - If a KPI was unavailable or estimated in a way that materially affects the \
-score, say so briefly (e.g. "delay burden data was unavailable for this \
-airport") -- but don't walk through all four KPIs one by one.
+conclusion, say so briefly in words (e.g. "delay burden data was unavailable \
+for this airport") -- without citing the missing number itself.
 - Long-haul share is a separate descriptive stat, not part of the composite \
-score -- don't conflate the two.
+score -- don't conflate the two. If the user explicitly asks "what \
+percentage/what is the X" for a specific stat (e.g. "what is the percentage \
+of long-haul flights out of Anchorage"), you may answer with that one \
+directly-requested figure, since it's the literal answer to their question \
+-- but do not also volunteer composite scores, KPI values, or other numbers \
+alongside it.
 
 ## Style
-- Be concise and analytical. Cite sources inline briefly rather than \
-dumping raw JSON -- the structured tool results are already returned \
-separately to the UI for a "show the math" view, so your prose should \
-summarize and interpret, not repeat every field.
+- Be concise, plain-language, and conclusion-first. Do not dump raw JSON, \
+KPI tables, or numeric breakdowns into your reply -- that level of detail \
+lives only in the "show the math" panel the UI renders separately from the \
+structured tool results. Your job is to answer the question in words a \
+non-technical stakeholder could follow without needing the numbers.
 """
 
 MAX_TOOL_ROUNDS = 6

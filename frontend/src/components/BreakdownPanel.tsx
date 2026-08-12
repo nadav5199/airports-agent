@@ -1,14 +1,38 @@
 import { useState } from "react";
-import type { BreakdownItem } from "../types";
+import type { BreakdownItem, Confidence } from "../types";
 import { isLongHaulShare, isScoreBreakdown } from "../types";
 import ConfidenceBadge from "./ConfidenceBadge";
 
-const KPI_LABELS: Record<string, string> = {
-  capacity_utilization: "Capacity Utilization",
-  traffic_growth: "Traffic Growth",
-  delay_burden: "Delay Burden",
-  load_factor: "Load Factor",
+const KPI_INFO: Record<string, { label: string; description: string }> = {
+  capacity_utilization: {
+    label: "Capacity Utilization",
+    description: "Peak-period operations ÷ FAA hourly runway capacity",
+  },
+  traffic_growth: {
+    label: "Traffic Growth",
+    description: "Multi-year CAGR of operations/passengers",
+  },
+  delay_burden: {
+    label: "Delay Burden",
+    description: "% of flights delayed 15+ min, weighted toward volume-caused delays",
+  },
+  load_factor: {
+    label: "Load Factor",
+    description: "Passengers ÷ seats",
+  },
 };
+
+const CONFIDENCE_LEGEND: { confidence: Confidence; description: string }[] = [
+  { confidence: "actual", description: "measured directly from source data" },
+  {
+    confidence: "estimated",
+    description: "computed via a lower-confidence proxy (e.g. no FAA Capacity Profile for this airport)",
+  },
+  {
+    confidence: "unavailable",
+    description: "could not be computed; excluded from the composite score",
+  },
+];
 
 function fmt(n: number | null | undefined, digits = 2): string {
   if (n === null || n === undefined || Number.isNaN(n)) return "—";
@@ -28,6 +52,8 @@ export default function BreakdownPanel({ items }: { items: BreakdownItem[] }) {
 
   if (!items || items.length === 0) return null;
 
+  const hasScoreCard = items.some(isScoreBreakdown);
+
   return (
     <div className="breakdown-panel">
       <button
@@ -41,6 +67,7 @@ export default function BreakdownPanel({ items }: { items: BreakdownItem[] }) {
       </button>
       {open && (
         <div className="breakdown-body">
+          {hasScoreCard && <ConfidenceLegend />}
           {items.map((item, idx) =>
             isScoreBreakdown(item) ? (
               <ScoreBreakdownCard key={`${item.airport_code}-score-${idx}`} item={item} />
@@ -50,6 +77,19 @@ export default function BreakdownPanel({ items }: { items: BreakdownItem[] }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function ConfidenceLegend() {
+  return (
+    <div className="breakdown-legend">
+      {CONFIDENCE_LEGEND.map(({ confidence, description }) => (
+        <span key={confidence} className="breakdown-legend-item">
+          <ConfidenceBadge confidence={confidence} />
+          {description}
+        </span>
+      ))}
     </div>
   );
 }
@@ -83,19 +123,45 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
             </tr>
           </thead>
           <tbody>
-            {kpiEntries.map(([key, kpi]) => (
-              <tr key={key}>
-                <td>{KPI_LABELS[key] ?? key}</td>
-                <td>{fmt(kpi.raw_value)}</td>
-                <td>{fmtPct(kpi.weight, 0)}</td>
-                <td>{kpi.normalized_0_100 === null ? "—" : fmt(kpi.normalized_0_100, 1)}</td>
-                <td>
-                  <ConfidenceBadge confidence={kpi.confidence} />
-                </td>
-                <td className="source-cell">{kpi.source}</td>
-                <td>{kpi.as_of}</td>
-              </tr>
-            ))}
+            {kpiEntries.map(([key, kpi]) => {
+              const info = KPI_INFO[key];
+              return (
+                <tr key={key}>
+                  <td>
+                    {info ? (
+                      <span className="kpi-name-cell">
+                        <span className="kpi-name">{info.label}</span>
+                        <span className="kpi-description">{info.description}</span>
+                      </span>
+                    ) : (
+                      key
+                    )}
+                  </td>
+                  <td>{fmt(kpi.raw_value)}</td>
+                  <td>{fmtPct(kpi.weight, 0)}</td>
+                  <td>
+                    {kpi.normalized_0_100 === null ? (
+                      "—"
+                    ) : (
+                      <span className="percentile-cell">
+                        <span className="percentile-bar">
+                          <span
+                            className="percentile-bar-fill"
+                            style={{ width: `${Math.max(0, Math.min(100, kpi.normalized_0_100))}%` }}
+                          />
+                        </span>
+                        {fmt(kpi.normalized_0_100, 1)}
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <ConfidenceBadge confidence={kpi.confidence} />
+                  </td>
+                  <td className="source-cell">{kpi.source}</td>
+                  <td>{kpi.as_of}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

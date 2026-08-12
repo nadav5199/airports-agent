@@ -316,6 +316,62 @@
   min-width: 180px;
 }
 
+.kpi-name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  white-space: normal;
+  min-width: 140px;
+}
+
+.kpi-name {
+  font-weight: 600;
+}
+
+.kpi-description {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.percentile-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.percentile-bar {
+  display: inline-block;
+  width: 60px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.percentile-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.breakdown-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.breakdown-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .badge {
   display: inline-block;
   padding: 0.1rem 0.5rem;
