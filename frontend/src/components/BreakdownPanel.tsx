@@ -157,8 +157,8 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
                       key
                     )}
                   </td>
-                  <td>{fmt(kpi.raw_value)}</td>
-                  <td>{fmtPct(kpi.weight, 0)}</td>
+                  <td className="kpi-numeric">{fmt(kpi.raw_value)}</td>
+                  <td className="kpi-numeric">{fmtPct(kpi.weight, 0)}</td>
                   <td>
                     {kpi.normalized_0_100 === null ? (
                       "—"
@@ -179,7 +179,7 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
                     <ConfidenceBadge confidence={kpi.confidence} />
                   </td>
                   <td className="source-cell">{kpi.source}</td>
-                  <td>{kpi.as_of}</td>
+                  <td className="kpi-numeric">{kpi.as_of}</td>
                 </tr>
               );
             })}
@@ -223,10 +223,10 @@ function LongHaulCard({
           </thead>
           <tbody>
             <tr>
-              <td>{fmt(item.threshold_miles, 0)}</td>
-              <td>{fmtPct(item.pct_long_haul_flights)}</td>
-              <td>{fmtPct(item.pct_long_haul_seats)}</td>
-              <td>{item.as_of}</td>
+              <td className="kpi-numeric">{fmt(item.threshold_miles, 0)}</td>
+              <td className="kpi-numeric">{fmtPct(item.pct_long_haul_flights)}</td>
+              <td className="kpi-numeric">{fmtPct(item.pct_long_haul_seats)}</td>
+              <td className="kpi-numeric">{item.as_of}</td>
             </tr>
           </tbody>
         </table>
