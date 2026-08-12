@@ -24,6 +24,22 @@
   max-width: 70ch;
 }
 
+.voice-output-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.voice-error {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: var(--error-text);
+}
+
 .app-body {
   flex: 1;
   display: flex;
@@ -212,6 +228,22 @@
 .chat-input-row button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.mic-button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mic-button-active {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-color: var(--error-text);
 }
 
 /* Breakdown panel */

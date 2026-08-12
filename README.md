@@ -194,7 +194,27 @@ All ranking/scoring logic itself — the formulas, weights, normalization, and m
 handling in §2 — is plain deterministic Python with no LLM involvement, satisfying the exam's
 "deterministic logic required, not only LLM output" requirement directly.
 
-### 5. Known Limitations (honest accounting)
+### 5. Voice (bonus)
+
+Voice support is called out in the exam brief as a bonus, not a requirement. Implemented via the
+browser-native **Web Speech API** (`SpeechRecognition` for speech-to-text, `speechSynthesis` for
+text-to-speech) rather than a third-party platform (e.g. Vapi):
+
+- **Mic input**: a 🎤 button next to the chat input (left of Send) transcribes speech and sends it
+  immediately — it goes through the exact same `/api/chat` call as typed messages, no new backend
+  code.
+- **Spoken replies**: an opt-in **"Read replies aloud" checkbox, off by default, sitting directly
+  under the page header/description** (above the airport sidebar and chat panel — easy to miss on
+  first glance since it's small and unchecked by default). Check it to have the LLM's prose reply
+  spoken via `speechSynthesis` — never the structured breakdown JSON.
+- **Why this over a hosted voice platform**: zero new accounts/API keys/services, works entirely
+  client-side, and reuses the existing chat endpoint unchanged — fit the 24h budget for a bonus
+  feature better than integrating an external voice pipeline.
+- **Known limitation**: Web Speech API is Chromium-only (Chrome/Edge) — no Safari/Firefox
+  support. The mic button and toggle detect support and hide themselves gracefully when
+  unavailable, rather than erroring.
+
+### 6. Known Limitations (honest accounting)
 
 - FAA ATADS and BTS T-100 volumes are synthetic fallback data, not real (see §3.1) — route
   distances and delay data are real; operations/passenger/seat *volumes* are not.

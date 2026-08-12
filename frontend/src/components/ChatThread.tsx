@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ChatMessage } from "../types";
 import BreakdownPanel from "./BreakdownPanel";
+import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
 
 export default function ChatThread({
   messages,
@@ -13,6 +14,13 @@ export default function ChatThread({
 }) {
   const [draft, setDraft] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Recognition only ever fires a single final result (interimResults is off),
+  // so there's no "live preview" moment to pause on -- send as soon as we have it.
+  const { isListening, isSupported, start, stop } = useSpeechRecognition((transcript) => {
+    if (!transcript || sending) return;
+    onSend(transcript);
+  });
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,6 +77,18 @@ export default function ChatThread({
           placeholder="Ask about airport expansion candidates..."
           disabled={sending}
         />
+        {isSupported && (
+          <button
+            type="button"
+            className={`mic-button ${isListening ? "mic-button-active" : ""}`}
+            onClick={() => (isListening ? stop() : start())}
+            disabled={sending}
+            title={isListening ? "Stop listening" : "Speak your question"}
+            aria-label={isListening ? "Stop listening" : "Speak your question"}
+          >
+            {isListening ? "●" : "🎤"}
+          </button>
+        )}
         <button type="submit" disabled={sending || !draft.trim()}>
           Send
         </button>
