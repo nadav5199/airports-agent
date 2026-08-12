@@ -44,6 +44,14 @@ function fmtPct(n: number | null | undefined, digits = 1): string {
   return `${(n * 100).toFixed(digits)}%`;
 }
 
+/** Tier a 0-100 value into low/mid/high for at-a-glance color coding. */
+function tierOf(n: number | null | undefined): "low" | "mid" | "high" | null {
+  if (n === null || n === undefined || Number.isNaN(n)) return null;
+  if (n < 33) return "low";
+  if (n < 66) return "mid";
+  return "high";
+}
+
 /** Collapsible "show the math" panel rendered under an agent reply whenever
  * that reply's `breakdown` array is non-empty. Renders one card per
  * ScoreBreakdown (KPI table + composite score) or LongHaulShare (stat card). */
@@ -99,12 +107,22 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
   // Most recent as_of across KPIs, for a card-level summary label.
   const asOfValues = kpiEntries.map(([, k]) => k.as_of).filter(Boolean);
   const asOf = asOfValues.length ? asOfValues.sort().at(-1) : "—";
+  const compositeTier = tierOf(item.composite_score);
+
+  // weight * normalized_0_100 / 100, summed, should equal the composite score --
+  // shown per-row and totaled so the table visibly reconstructs the composite.
+  const contributions = kpiEntries.map(([, kpi]) =>
+    kpi.normalized_0_100 === null || kpi.weight === null ? null : (kpi.weight * kpi.normalized_0_100) / 100
+  );
+  const totalContribution = contributions.some((c) => c !== null)
+    ? contributions.reduce((sum: number, c) => sum + (c ?? 0), 0)
+    : null;
 
   return (
     <div className="breakdown-card">
       <div className="breakdown-card-header">
         <strong>{item.airport_code}</strong>
-        <span className="composite-score">
+        <span className={`composite-score${compositeTier ? ` composite-score--${compositeTier}` : ""}`}>
           Composite Score: {item.composite_score === null ? "N/A" : fmt(item.composite_score, 1)}
         </span>
         <span className="as-of">as of {asOf}</span>
@@ -117,14 +135,16 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
               <th>Raw Value</th>
               <th>Weight</th>
               <th>Percentile Score</th>
+              <th>Contribution</th>
               <th>Confidence</th>
               <th>Source</th>
               <th>As Of</th>
             </tr>
           </thead>
           <tbody>
-            {kpiEntries.map(([key, kpi]) => {
+            {kpiEntries.map(([key, kpi], i) => {
               const info = KPI_INFO[key];
+              const tier = tierOf(kpi.normalized_0_100);
               return (
                 <tr key={key}>
                   <td>
@@ -146,7 +166,7 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
                       <span className="percentile-cell">
                         <span className="percentile-bar">
                           <span
-                            className="percentile-bar-fill"
+                            className={`percentile-bar-fill${tier ? ` percentile-bar-fill--${tier}` : ""}`}
                             style={{ width: `${Math.max(0, Math.min(100, kpi.normalized_0_100))}%` }}
                           />
                         </span>
@@ -154,6 +174,7 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
                       </span>
                     )}
                   </td>
+                  <td className="kpi-contribution">{contributions[i] === null ? "—" : fmt(contributions[i], 1)}</td>
                   <td>
                     <ConfidenceBadge confidence={kpi.confidence} />
                   </td>
@@ -163,6 +184,15 @@ function ScoreBreakdownCard({ item }: { item: Extract<BreakdownItem, { kpis: unk
               );
             })}
           </tbody>
+          {totalContribution !== null && (
+            <tfoot>
+              <tr className="kpi-table-total">
+                <td colSpan={4}>Sum of contributions</td>
+                <td className="kpi-contribution">{fmt(totalContribution, 1)}</td>
+                <td colSpan={3} />
+              </tr>
+            </tfoot>
+          )}
         </table>
       </div>
     </div>

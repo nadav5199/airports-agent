@@ -19,6 +19,12 @@
   --badge-unavailable-text: #9c1c1c;
   --error-bg: #fbe4e4;
   --error-text: #8a1c1c;
+  --tier-low: #c0392b;
+  --tier-low-bg: #f6d6d6;
+  --tier-mid: #8a6400;
+  --tier-mid-bg: #fff2cc;
+  --tier-high: #146c2e;
+  --tier-high-bg: #dcf5e2;
 
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.4;

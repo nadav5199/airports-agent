@@ -13,14 +13,16 @@
 }
 
 .app-header h1 {
-  margin: 0 0 0.25rem;
-  font-size: 1.4rem;
+  margin: 0 0 0.3rem;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .app-header p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   max-width: 70ch;
 }
 
@@ -57,6 +59,7 @@
   border-radius: 8px;
   padding: 0.75rem;
   overflow-y: auto;
+  box-shadow: 0 1px 3px rgba(20, 25, 40, 0.06);
 }
 
 .sidebar h2 {
@@ -103,9 +106,16 @@
 .airport-list li {
   display: flex;
   flex-direction: column;
-  padding: 0.35rem 0.25rem;
+  padding: 0.35rem 0.4rem;
+  margin: 0 -0.4rem;
   border-bottom: 1px solid var(--border);
+  border-radius: 6px;
   font-size: 0.82rem;
+  transition: background-color 0.15s;
+}
+
+.airport-list li:hover {
+  background: var(--bg);
 }
 
 .airport-code {
@@ -131,6 +141,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(20, 25, 40, 0.06);
 }
 
 .chat-thread {
@@ -166,9 +177,10 @@
 
 .chat-bubble {
   max-width: 75%;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  border-radius: 12px;
   white-space: pre-wrap;
+  box-shadow: 0 1px 2px rgba(20, 25, 40, 0.08);
 }
 
 .chat-message-user .chat-bubble {
@@ -189,6 +201,12 @@
 .chat-bubble-pending {
   font-style: italic;
   opacity: 0.8;
+}
+
+.chat-list {
+  margin: 0.2rem 0;
+  padding-left: 1.2rem;
+  white-space: normal;
 }
 
 .chat-role {
@@ -223,6 +241,11 @@
   color: var(--accent-contrast);
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.chat-input-row button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 85%, black);
 }
 
 .chat-input-row button:disabled {
@@ -238,6 +261,11 @@
   cursor: pointer;
   font-size: 1rem;
   line-height: 1;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.mic-button:hover:not(:disabled) {
+  background: var(--bg);
 }
 
 .mic-button-active {
@@ -253,13 +281,20 @@
 }
 
 .breakdown-toggle {
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.3rem 0.6rem;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
   font-size: 0.8rem;
+  font-weight: 700;
   cursor: pointer;
-  color: var(--text);
+  color: var(--accent);
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.breakdown-toggle:hover {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent);
 }
 
 .breakdown-body {
@@ -274,6 +309,7 @@
   border-radius: 8px;
   padding: 0.6rem;
   background: var(--bg);
+  box-shadow: 0 1px 2px rgba(20, 25, 40, 0.05);
 }
 
 .breakdown-card-header {
@@ -355,6 +391,43 @@
   height: 100%;
   background: var(--accent);
   border-radius: 999px;
+  transition: width 0.2s;
+}
+
+.percentile-bar-fill--low {
+  background: var(--tier-low);
+}
+
+.percentile-bar-fill--mid {
+  background: var(--tier-mid);
+}
+
+.percentile-bar-fill--high {
+  background: var(--tier-high);
+}
+
+.composite-score--low {
+  color: var(--tier-low);
+}
+
+.composite-score--mid {
+  color: var(--tier-mid);
+}
+
+.composite-score--high {
+  color: var(--tier-high);
+}
+
+.kpi-contribution {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.kpi-table-total td {
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: none;
+  border-top: 2px solid var(--border);
 }
 
 .breakdown-legend {
