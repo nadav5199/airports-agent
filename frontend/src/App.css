@@ -214,6 +214,22 @@
   cursor: not-allowed;
 }
 
+.mic-button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mic-button-active {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-color: var(--error-text);
+}
+
 /* Breakdown panel */
 .breakdown-panel {
   max-width: 100%;

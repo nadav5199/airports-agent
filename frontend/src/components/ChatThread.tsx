@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ChatMessage } from "../types";
 import BreakdownPanel from "./BreakdownPanel";
+import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
 
 export default function ChatThread({
   messages,
@@ -13,6 +14,12 @@ export default function ChatThread({
 }) {
   const [draft, setDraft] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Recognized speech lands in the same `draft` state as typed input, so the
+  // user can review/edit before sending -- matches the existing typed-input UX.
+  const { isListening, isSupported, start, stop } = useSpeechRecognition((transcript) => {
+    setDraft(transcript);
+  });
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,6 +76,18 @@ export default function ChatThread({
           placeholder="Ask about airport expansion candidates..."
           disabled={sending}
         />
+        {isSupported && (
+          <button
+            type="button"
+            className={`mic-button ${isListening ? "mic-button-active" : ""}`}
+            onClick={() => (isListening ? stop() : start())}
+            disabled={sending}
+            title={isListening ? "Stop listening" : "Speak your question"}
+            aria-label={isListening ? "Stop listening" : "Speak your question"}
+          >
+            {isListening ? "●" : "🎤"}
+          </button>
+        )}
         <button type="submit" disabled={sending || !draft.trim()}>
           Send
         </button>
