@@ -200,11 +200,13 @@ Voice support is called out in the exam brief as a bonus, not a requirement. Imp
 browser-native **Web Speech API** (`SpeechRecognition` for speech-to-text, `speechSynthesis` for
 text-to-speech) rather than a third-party platform (e.g. Vapi):
 
-- **Mic input**: a mic button next to the chat input transcribes speech into the same `draft`
-  field the typed input uses, so the user reviews/edits before sending — it goes through the
-  exact same `/api/chat` call as typed messages, no new backend code.
-- **Spoken replies**: an opt-in "Read replies aloud" toggle (off by default) speaks the LLM's
-  prose reply via `speechSynthesis` — never the structured breakdown JSON.
+- **Mic input**: a 🎤 button next to the chat input (left of Send) transcribes speech and sends it
+  immediately — it goes through the exact same `/api/chat` call as typed messages, no new backend
+  code.
+- **Spoken replies**: an opt-in **"Read replies aloud" checkbox, off by default, sitting directly
+  under the page header/description** (above the airport sidebar and chat panel — easy to miss on
+  first glance since it's small and unchecked by default). Check it to have the LLM's prose reply
+  spoken via `speechSynthesis` — never the structured breakdown JSON.
 - **Why this over a hosted voice platform**: zero new accounts/API keys/services, works entirely
   client-side, and reuses the existing chat endpoint unchanged — fit the 24h budget for a bonus
   feature better than integrating an external voice pipeline.
