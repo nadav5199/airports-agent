@@ -98,9 +98,24 @@ export default function App() {
   }
 
   return (
-    <div className="app-shell">
+    <>
       <header className="app-header">
-        <h1>Airport Investment Intelligence Agent</h1>
+        <div className="app-header-title">
+          <svg
+            className="app-header-mark"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 16l7-2 4.5-8.5a1.5 1.5 0 0 1 2.7 1.3L13.8 14l6.2-1 2 2-8 3.5-1 3-2-1 .3-3-6-1.2-2 2-1.5-.5.7-2.3z"
+              fill="currentColor"
+            />
+          </svg>
+          <h1>Airport Investment Intelligence Agent</h1>
+        </div>
         <p>
           Chat with a deterministic-scoring-backed agent about US airport terminal/capacity
           expansion candidates. Scores come from real computed KPIs, not LLM guesses -- expand
@@ -121,10 +136,12 @@ export default function App() {
         )}
         {voiceError && <p className="voice-error">{voiceError}</p>}
       </header>
-      <div className="app-body">
-        <AirportSidebar airports={airports} loading={airportsLoading} error={airportsError} />
-        <ChatThread messages={messages} onSend={handleSend} sending={sending} />
+      <div className="app-shell">
+        <div className="app-body">
+          <AirportSidebar airports={airports} loading={airportsLoading} error={airportsError} />
+          <ChatThread messages={messages} onSend={handleSend} sending={sending} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

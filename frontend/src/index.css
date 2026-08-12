@@ -1,27 +1,44 @@
 :root {
   color-scheme: light;
-  --bg: #f5f6f8;
-  --panel-bg: #ffffff;
-  --border: #d9dde3;
-  --text: #1c2230;
-  --text-muted: #5a6472;
-  --accent: #2f5fd9;
-  --accent-contrast: #ffffff;
-  --user-bubble: #2f5fd9;
-  --user-bubble-text: #ffffff;
-  --assistant-bubble: #eef1f6;
-  --assistant-bubble-text: #1c2230;
-  --badge-actual-bg: #dcf5e2;
-  --badge-actual-text: #146c2e;
-  --badge-estimated-bg: #fff2cc;
-  --badge-estimated-text: #8a6400;
-  --badge-unavailable-bg: #f6d6d6;
-  --badge-unavailable-text: #9c1c1c;
-  --error-bg: #fbe4e4;
-  --error-text: #8a1c1c;
 
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.4;
+  /* Palette -- one cool-slate family; tier trio shares the accent's teal
+     undertone so semantic color and the accent read as one system. */
+  --ink: #1a2233;
+  --ink-muted: #5b6472;
+  --surface: #f4f6f9;
+  --surface-raised: #ffffff;
+  --line: #dbe1ea;
+  --accent: #1c6e8c;
+  --accent-deep: #134f63;
+  --accent-contrast: #ffffff;
+
+  --tier-low: #a8433c;
+  --tier-low-bg: #f4dfdd;
+  --tier-mid: #b3872f;
+  --tier-mid-bg: #f5ecd8;
+  --tier-high: #3f8f6f;
+  --tier-high-bg: #ddece6;
+
+  --user-bubble: var(--accent);
+  --user-bubble-text: #ffffff;
+  --assistant-bubble: var(--surface-raised);
+  --assistant-bubble-text: var(--ink);
+
+  --error-bg: #f4dfdd;
+  --error-text: #8f332c;
+
+  /* Type */
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --text-xs: 0.72rem;
+  --text-sm: 0.82rem;
+  --text-base: 0.92rem;
+  --text-lg: 1.1rem;
+  --text-xl: 1.35rem;
+  --text-2xl: 1.7rem;
+
+  font-family: var(--font-sans);
+  line-height: 1.45;
 }
 
 * {
@@ -30,8 +47,8 @@
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 #root {
