@@ -24,6 +24,16 @@
   max-width: 70ch;
 }
 
+.voice-output-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
 .app-body {
   flex: 1;
   display: flex;

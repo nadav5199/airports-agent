@@ -18,6 +18,10 @@ export default function App() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
 
+  // Off by default so replies don't start talking unexpectedly on load.
+  const [voiceOutput, setVoiceOutput] = useState(false);
+  const speechSupported = typeof window !== "undefined" && "speechSynthesis" in window;
+
   useEffect(() => {
     fetchAirports()
       .then((data) => setAirports(data))
@@ -36,6 +40,11 @@ export default function App() {
         ...prev,
         { id: newId(), role: "assistant", text: resp.reply, breakdown: resp.breakdown },
       ]);
+      // Speak only the prose reply, never the structured breakdown JSON.
+      if (voiceOutput && speechSupported) {
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(resp.reply));
+      }
     } catch (err) {
       setMessages((prev) => [
         ...prev,
@@ -62,6 +71,19 @@ export default function App() {
           expansion candidates. Scores come from real computed KPIs, not LLM guesses -- expand
           "Show the math" under any answer to audit the numbers.
         </p>
+        {speechSupported && (
+          <label className="voice-output-toggle">
+            <input
+              type="checkbox"
+              checked={voiceOutput}
+              onChange={(e) => {
+                setVoiceOutput(e.target.checked);
+                if (!e.target.checked) window.speechSynthesis.cancel();
+              }}
+            />
+            Read replies aloud
+          </label>
+        )}
       </header>
       <div className="app-body">
         <AirportSidebar airports={airports} loading={airportsLoading} error={airportsError} />
