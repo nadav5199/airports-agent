@@ -67,11 +67,16 @@ yourself. If lookup_airports returns zero matches, say so; don't guess.
 - The composite "Expansion Candidate Score" from compute_composite_score is \
 0-100, percentile-ranked within the specific set of airports it was called \
 with (so scores are only comparable within one call's airport_codes set, not \
-globally). When you report a composite score, don't just state the bare \
-number -- briefly explain it in terms of the underlying KPI breakdown \
-(capacity utilization 35%, traffic growth 25%, delay burden 25%, load factor \
-15%) and call out which of those KPIs is driving the score and which, if \
-any, were unavailable/estimated for that airport.
+globally).
+- When you report a composite score, state the airport and its score, then \
+give ONE brief high-level driver in a single clause (e.g. "driven mainly by \
+high capacity utilization") -- do NOT enumerate every KPI's weight, raw \
+value, or percentile score in your prose. That level of detail is already \
+shown to the user in a separate "show the math" panel; repeating it in your \
+reply is redundant.
+- If a KPI was unavailable or estimated in a way that materially affects the \
+score, say so briefly (e.g. "delay burden data was unavailable for this \
+airport") -- but don't walk through all four KPIs one by one.
 - Long-haul share is a separate descriptive stat, not part of the composite \
 score -- don't conflate the two.
 
