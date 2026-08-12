@@ -36,6 +36,7 @@ from __future__ import annotations
 import io
 import sys
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pandas as pd
@@ -70,6 +71,7 @@ USE_COLS = [
 
 
 def _download_month(year: int, month: int) -> pd.DataFrame | None:
+    print(f"  Downloading BTS On-Time Performance {year}-{month:02d} ...")
     url = BASE_URL.format(year=year, month=month)
     resp = requests.get(url, timeout=180)
     if resp.status_code != 200:
@@ -80,6 +82,7 @@ def _download_month(year: int, month: int) -> pd.DataFrame | None:
         with z.open(csv_name) as f:
             df = pd.read_csv(f, usecols=lambda c: c.strip() in USE_COLS, low_memory=False)
     df.columns = [c.strip() for c in df.columns]
+    print(f"  Done downloading {year}-{month:02d} ({len(df)} rows)")
     return df
 
 
@@ -87,9 +90,12 @@ def fetch_ontime_delays(airport_codes: list[str]) -> pd.DataFrame:
     scope = set(airport_codes)
     monthly_frames = []
 
-    for year, month in MONTHS_TO_FETCH:
-        print(f"  Downloading BTS On-Time Performance {year}-{month:02d} ...")
-        df = _download_month(year, month)
+    # Each month is an independent HTTP download + zip decompress (I/O-bound), so
+    # fetch them concurrently rather than one at a time.
+    with ThreadPoolExecutor(max_workers=len(MONTHS_TO_FETCH)) as pool:
+        downloaded = list(pool.map(lambda ym: _download_month(*ym), MONTHS_TO_FETCH))
+
+    for (year, month), df in zip(MONTHS_TO_FETCH, downloaded):
         if df is None:
             continue
         df = df[df["Origin"].isin(scope)].copy()
