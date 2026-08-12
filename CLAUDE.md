@@ -8,8 +8,9 @@ based on increased flight and passenger capacity — i.e., which airports are st
 candidates for terminal expansion or other modernization.
 
 **Status:** Core implementation complete and merged to `main` (ingestion, scoring, backend,
-frontend) — verified end-to-end against all four example questions from the exam brief. Remaining:
-the short design/architecture document deliverable (`docs/design.md`, not yet written).
+frontend) — verified end-to-end against all four example questions from the exam brief. The short
+design/architecture document deliverable is written and lives in the "Design / Architecture"
+section of [README.md](README.md).
 
 ## Example Queries the Agent Must Support
 - "Which airports in New England are strong candidates for terminal expansion?"
