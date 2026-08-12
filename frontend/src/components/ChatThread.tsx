@@ -15,10 +15,11 @@ export default function ChatThread({
   const [draft, setDraft] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Recognized speech lands in the same `draft` state as typed input, so the
-  // user can review/edit before sending -- matches the existing typed-input UX.
+  // Recognition only ever fires a single final result (interimResults is off),
+  // so there's no "live preview" moment to pause on -- send as soon as we have it.
   const { isListening, isSupported, start, stop } = useSpeechRecognition((transcript) => {
-    setDraft(transcript);
+    if (!transcript || sending) return;
+    onSend(transcript);
   });
 
   useEffect(() => {

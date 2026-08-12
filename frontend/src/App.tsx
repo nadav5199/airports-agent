@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { fetchAirports, postChat } from "./api";
 import type { Airport, ChatMessage } from "./types";
@@ -21,6 +21,9 @@ export default function App() {
   // Off by default so replies don't start talking unexpectedly on load.
   const [voiceOutput, setVoiceOutput] = useState(false);
   const speechSupported = typeof window !== "undefined" && "speechSynthesis" in window;
+  // Chrome silently drops speech if the utterance object is garbage-collected
+  // before it finishes -- keep a live reference so that can't happen.
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   useEffect(() => {
     fetchAirports()
@@ -43,7 +46,12 @@ export default function App() {
       // Speak only the prose reply, never the structured breakdown JSON.
       if (voiceOutput && speechSupported) {
         window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance(resp.reply));
+        const utterance = new SpeechSynthesisUtterance(resp.reply);
+        utteranceRef.current = utterance; // keep alive -- see comment above
+        utterance.onend = () => {
+          utteranceRef.current = null;
+        };
+        window.speechSynthesis.speak(utterance);
       }
     } catch (err) {
       setMessages((prev) => [
