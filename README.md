@@ -15,7 +15,9 @@ frontend layers are built against.
 - `docs/` — contracts (`docs/contracts.md`)
 
 ## Status
-Scaffolding in progress — see `CLAUDE.md` for full status and plan.
+Core implementation complete — ingestion, scoring, backend, and frontend are built and verified
+end-to-end against all four example questions from the exam brief. See `CLAUDE.md` for full
+status and plan.
 
 ## Design / Architecture
 
@@ -75,6 +77,35 @@ drag a score down.
   % of flights/seats over a 2,400-statute-mile threshold — computed straight from route distance
   data. It answers a literal question and isn't a congestion/investment signal, so it's reported
   standalone rather than folded into the composite score.
+
+#### 2.2b Which KPIs rest on synthetic data
+
+To be explicit rather than requiring this to be traced through §3.1's source-by-source table,
+here is the same information mapped onto the four KPIs that feed the composite score:
+
+| KPI | Data behind it | Real or synthetic |
+|---|---|---|
+| Capacity Utilization | operations (FAA ATADS) ÷ runway capacity (FAA Capacity Profiles) | **Both synthetic** — ATADS operations are generated; Capacity Profile figures are hand-transcribed approximations, not pulled from each airport's actual published PDF |
+| Traffic Growth Rate | multi-year trend in operations (ATADS) and/or passengers (BTS T-100) | **Synthetic** |
+| Delay Burden | BTS On-Time Performance | **Real** — actual downloaded monthly files, 2 months, 50/62 airports |
+| Passenger/Seat Load Factor | passengers ÷ seats (BTS T-100) | **Synthetic** |
+| Long-haul share (standalone stat, not in composite score) | route distance (BTS T-100) | **Real** — computed via haversine from real lat/lon in `airports.csv`; only the passenger/seat *volumes* riding on top of those routes are synthetic |
+
+**Net effect: 3 of the 4 composite-score KPIs (Capacity Utilization, Traffic Growth, Load
+Factor) rest on synthetic data; only Delay Burden is real.** This is a bigger exposure than
+"two of five sources are synthetic" sounds like at the source level, and is called out here
+explicitly rather than left for the reader to derive.
+
+**Why these two sources ended up synthetic — access mechanics, not cost.** Both FAA ATADS and
+BTS T-100 are free, unlike the sources CLAUDE.md excludes outright for being paywalled
+(FlightAware AeroAPI, FAA ASPM). They ended up synthetic because neither is programmatically
+reachable within a 24h scope in practice:
+- **FAA ATADS** is served through a session/ViewState-driven ASP.NET report generator with no
+  stable bulk-CSV or REST endpoint — there's no fixed URL to script against, paid or free.
+- **BTS T-100** bulk files sit behind a stateful web form that generates unpredictable,
+  per-request hashed filenames (e.g. `896816367_T_T100D_SEGMENT_ALL_CARRIER.zip`), unlike the
+  On-Time Performance files (used for real, see above), which have a stable, predictable URL
+  pattern.
 
 #### 2.3 Honesty about data confidence — two separate axes
 
